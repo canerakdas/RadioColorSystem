@@ -18,24 +18,28 @@ import type {TokenColors} from './index.type';
  */
 export default function cssToken(name: string, {light, dark}: TokenColors) {
   /**
-   * Converts a HSL formatted color object to a CSS color string.
-   * @param {Color} color - The color object.
-   * @returns {string} The CSS color string.
+   * Converts a color object to a string.
+   * @param {Color} color Hsl formatted color
+   * @returns {string} Hsl formatted color as string
    */
-  const colorToString = ({h, s, l}: Color): string => {
-    return `hsl(${h.toFixed(2)}, ${s.toFixed(2)}%, ${l.toFixed(2)}%)`;
+  const hslToString = (color: Color) => {
+    const {h, s, l} = color;
+    return `${h.toFixed(2)} ${s.toFixed(2)}% ${l.toFixed(2)}%`;
   };
 
   const {token} = toCssTree;
+  const tokenName = `${name}-hsl`;
+  const value = `hsl(var(--${tokenName}))`;
+
   if (dark) {
     return {
-      light: token(name, colorToString(light)),
-      dark: token(name, colorToString(dark)),
+      light: [token(tokenName, hslToString(light)), token(name, value)],
+      dark: [token(tokenName, hslToString(dark)), token(name, value)],
     };
   }
 
   return {
-    light: token(name, colorToString(light)),
+    light: [token(tokenName, hslToString(light)), token(name, value)],
     dark: null,
   };
 }

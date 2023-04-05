@@ -55,7 +55,7 @@ const radioColor = function () {
       suffix = '',
       dark = true,
       font = true,
-      selector = {AttributeSelector: true, ClassSelector: true},
+      selector = {attribute: true, class: true},
       theme = {
         darken: variants.dark,
         lighten: variants.light,
@@ -82,8 +82,8 @@ const radioColor = function () {
           names
         );
 
-        setAttributes(names, font, selector.AttributeSelector);
-        setClasses(names, font, selector.ClassSelector);
+        if (selector.attribute) setAttributes(names, font, selector.attribute);
+        if (selector.class) setClasses(names, font, selector.class);
       }
     }
 
@@ -119,14 +119,14 @@ const radioColor = function () {
         dark: theme.dark,
       });
 
-      tokens.light = [...tokens.light, light];
-      if (dark) tokens.dark = [...tokens.dark, dark];
+      tokens.light = [...tokens.light, ...light];
+      if (dark) tokens.dark = [...tokens.dark, ...dark];
     } else {
       const {light} = cssToken(background, {
         light: theme.light,
       });
 
-      tokens.light = [...tokens.light, light];
+      tokens.light = [...tokens.light, ...light];
     }
 
     if (theme.font) {
@@ -136,14 +136,14 @@ const radioColor = function () {
           dark: getTextColor(theme.dark),
         });
 
-        tokens.light = [...tokens.light, light];
-        if (dark) tokens.dark = [...tokens.dark, dark];
+        tokens.light = [...tokens.light, ...light];
+        if (dark) tokens.dark = [...tokens.dark, ...dark];
       } else {
         const {light} = cssToken(text, {
           light: getTextColor(theme.light),
         });
 
-        tokens.light = [...tokens.light, light];
+        tokens.light = [...tokens.light, ...light];
       }
     }
   };

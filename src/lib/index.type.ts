@@ -21,8 +21,8 @@ export type ColorVariant = (color: Color) => {
  * @property {boolean} [ColorOptions.dark=true] - Whether to generate dark color variants.
  * @property {boolean} [ColorOptions.font=true] - Whether to generate font color variants.
  * @property {Object} [ColorOptions.selector] - An object specifying which selectors to generate.
- * @property {boolean} [ColorOptions.selector.AttributeSelector=true] - Whether to generate attribute selectors.
- * @property {boolean} [ColorOptions.selector.ClassSelector=true] - Whether to generate class selectors.
+ * @property {boolean} [ColorOptions.selector.attribute=true] - Whether to generate attribute selectors.
+ * @property {boolean} [ColorOptions.selector.class=true] - Whether to generate class selectors.
  * @property {Object} [ColorOptions.theme] - An object specifying color variants to use when generating token styles.
  * @property {ColorVariant} [ColorOptions.theme.darken] - A function that returns an array of objects representing dark color variants.
  * @property {ColorVariant} [ColorOptions.theme.lighten] - A function that returns an array of objects representing light color variants.
@@ -35,12 +35,12 @@ export type ColorOptions = {
   dark?: boolean;
   font?: boolean;
   selector?: {
-    AttributeSelector?: boolean;
-    ClassSelector?: boolean;
+    attribute?: boolean;
+    class?: boolean;
   };
   theme?: {
-    darken: ColorVariant;
-    lighten: ColorVariant;
+    darken?: ColorVariant;
+    lighten?: ColorVariant;
   };
 };
 
