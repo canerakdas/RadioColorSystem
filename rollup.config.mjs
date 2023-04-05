@@ -3,18 +3,13 @@ import resolve from '@rollup/plugin-node-resolve';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 
-import pkg from './package.json';
-
-const name = pkg.name
-  .replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
-  .replace(/^\w/, m => m.toUpperCase())
-  .replace(/-\w/g, m => m[1].toUpperCase());
+const name = 'radio-color-system';
 
 export default {
   input: 'src/index.ts',
   output: [
-    {file: pkg.module, format: 'es'},
-    {file: pkg.main, format: 'umd', name},
+    {file: 'build/index.mjs', format: 'es'},
+    {file: 'build/index.js', format: 'umd', name},
   ],
   plugins: [
     svelte({
@@ -23,4 +18,5 @@ export default {
     resolve(),
     typescript(),
   ],
+  external: ['css-tree'],
 };
