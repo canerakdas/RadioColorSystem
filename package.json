@@ -1,6 +1,6 @@
 {
   "name": "radio-color-system",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
@@ -44,5 +44,11 @@
   "type": "module",
   "dependencies": {
     "css-tree": "^2.3.1"
-  }
+  },
+  "keywords": [
+    "svelte",
+    "color",
+    "palette",
+    "color-system"
+  ]
 }
