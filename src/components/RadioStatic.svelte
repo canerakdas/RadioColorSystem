@@ -1,21 +1,37 @@
 <script lang="ts">
-  import radioColor from "../lib/index";
-  import type { ColorOptions } from "../lib/index.type";
+  import radioColor from '../lib/index';
+  import type {ColorOptions} from '../lib/index.type';
+  import {onMount} from 'svelte';
 
   export let colors: ColorOptions[] = [];
+  export let target = '';
+  export let async = false;
+  let style = '';
+  let mounted = false;
 
-  const { setTarget, setColors, stylesheet } = radioColor();
+  const {setTarget, setColors, stylesheet} = radioColor();
 
-  export let target = "";
-
-  if (target !== undefined) {
-    setTarget(target);
+  $: if (async === false) {
+    setColors(colors);
+    style = stylesheet();
+    if (target !== undefined) {
+      setTarget(target);
+    }
   }
 
-  setColors(colors);
+  $: if (async === true && mounted === true) {
+    setColors(colors);
 
-  $: text = stylesheet();
+    if (target !== undefined) {
+      setTarget(target);
+    }
+    style = stylesheet();
+  }
+
+  onMount(() => {
+    mounted = true;
+  });
 </script>
 
-{@html `<style>${text}}</style>`}
+<svelte:element this="style">{style}</svelte:element>
 <slot />
