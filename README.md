@@ -69,6 +69,10 @@ To use RCS, import it into your Svelte component and create your color palette a
 It takes the dominant hue value in the image and allows it to be used in the component.
 
 ```svelte
+<script>
+  import { RadioStatic } from 'radio-color-system'
+</script>
+
 <RadioActive>
   <div class="dynamic-80">
     <h3 class="dynamic-font-80">This is the dynamic color</h3>
