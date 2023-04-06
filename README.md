@@ -70,7 +70,7 @@ It takes the dominant hue value in the image and allows it to be used in the com
 
 ```svelte
 <script>
-  import { RadioStatic } from 'radio-color-system'
+  import { RadioActive } from 'radio-color-system'
 </script>
 
 <RadioActive>
