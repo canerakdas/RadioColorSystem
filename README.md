@@ -14,6 +14,8 @@ npm install radio-color-system
 
 To use RCS, import it into your Svelte component and create your color palette as needed:
 
+### User generated static colors
+
 ```svelte
 <script>
   import { RadioStatic } from 'radio-color-system'
@@ -60,4 +62,18 @@ To use RCS, import it into your Svelte component and create your color palette a
     padding: 1.5rem 0;
   }
 </style>
+```
+
+### Dynamic color
+
+It takes the dominant hue value in the image and allows it to be used in the component.
+
+```svelte
+<RadioActive>
+  <div class="dynamic-80">
+    <h3 class="dynamic-font-80">This is the dynamic color</h3>
+    <img src="./image.png" alt="dynamic" />
+  </div>
+</RadioActive>
+
 ```
