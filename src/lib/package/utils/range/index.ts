@@ -7,7 +7,7 @@
  * an array of `Range` objects as input and returns an array of HSLColor objects as
  * output.
  */
-import type {Color, CurveParams, Range} from './index.type';
+import type {Color, CurveParams, Range} from './index.d';
 
 /**
  * Generate an array of HSL colors with interpolated values based on the given parameters

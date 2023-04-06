@@ -5,14 +5,14 @@
  */
 
 import type {Declaration, PseudoClassSelector} from 'css-tree';
-import {SelectorType} from './index.type';
+import {SelectorType} from './index.d';
 
 /**
  * Returns the type of CSS selector based on the provided target string.
  * @param {string} target The target string to check.
  * @returns {string} The type of CSS selector.
  */
-const getSelectorType = (target: string): SelectorType => {
+export const getSelectorType = (target: string): SelectorType => {
   switch (target[0]) {
     case ':':
       return SelectorType.PseudoClassSelector;
@@ -32,7 +32,7 @@ const getSelectorType = (target: string): SelectorType => {
  * @param {string} target The CSS selector to normalize.
  * @returns {string} The normalized CSS selector.
  */
-const normalizeSelector = (target: string): string => {
+export const normalizeSelector = (target: string): string => {
   switch (target[0]) {
     case ':':
     case '#':

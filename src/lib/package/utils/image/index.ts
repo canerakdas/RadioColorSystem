@@ -3,7 +3,7 @@
  */
 import type {ColorOptions} from '../../index.type';
 import {rgbToHsl} from '../helpers';
-import type {ImageColor} from './index.type';
+import type {ImageColor} from './index.d';
 
 /**
  * Gets the dominant color of an image within a specified area, based on a set of limits.

@@ -3,8 +3,8 @@
  */
 import toCssTree from '../cssTree';
 
-import type {Color} from '../range/index.type';
-import type {TokenColors} from './index.type';
+import type {Color} from '../range/index.d';
+import type {TokenColors} from './index.d';
 
 /**
  * Creates a token for a CSS color scheme with the given name and token colors.
