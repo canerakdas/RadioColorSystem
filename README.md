@@ -2,12 +2,6 @@
 
 Radio Color System is a library of dynamic colors and color utilities for Svelte, inspired by the Material Color System. With Radio Color System, you can easily add a consistent and visually appealing color scheme to your Svelte projects.
 
-## Features
-
-- Dynamic color
-- Provides correct contrast rated background and text color
--
-
 ## Installation
 
 To install rcs, simply add it to your project's dependencies:
