@@ -32,13 +32,13 @@ import type {
  * @property {string} TokenTheme.target - The target selector for the token.
  */
 const radioColor = function () {
-  const attributes: Rule[] = [];
-  const classes: Rule[] = [];
   const tokens: TokenScheme = {
     light: [],
     dark: [],
   };
 
+  let attributes: Rule[] = [];
+  let classes: Rule[] = [];
   let styles = '';
   let target = ':root';
 
@@ -211,10 +211,23 @@ const radioColor = function () {
   };
 
   /**
+   * Sets the default values
+   */
+  const setDefaults = () =>{
+    attributes = [];
+    classes = [];
+    tokens.light = [];
+    tokens.dark = [];
+    styles = '';
+    target = ':root';
+  }
+
+  /**
    * Returns the stylesheet
    * @returns {string} - The stylesheet
    */
   const stylesheet = (): string => {
+    setDefaults();
     return styles;
   };
 
