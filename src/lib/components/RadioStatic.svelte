@@ -9,9 +9,10 @@
   let style = '';
   let mounted = false;
 
-  const {setTarget, setColors, stylesheet} = radioColor();
+  const {setTarget, setColors, stylesheet, clearStyles} = radioColor();
 
   $: if (async === false) {
+    clearStyles();
     setColors(colors);
     style = stylesheet();
     if (target !== undefined) {
@@ -20,6 +21,7 @@
   }
 
   $: if (async === true && mounted === true) {
+    clearStyles();
     setColors(colors);
 
     if (target !== undefined) {

@@ -11,7 +11,7 @@
     name: 'dynamic',
   };
 
-  const {setTarget, setColors, stylesheet} = radioColor();
+  const {setTarget, setColors, stylesheet, clearStyles} = radioColor();
   let style = '';
   let mounted = false;
 
@@ -20,11 +20,14 @@
   }
 
   if (async === false) {
+    clearStyles();
     setColors([color]);
     style = stylesheet();
   }
 
   $: if (mounted) {
+    clearStyles();
+
     getImageColor({
       name: color.name || '',
       target: target,

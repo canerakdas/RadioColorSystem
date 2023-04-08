@@ -218,7 +218,6 @@ const radioColor = function () {
     classes = [];
     tokens.light = [];
     tokens.dark = [];
-    styles = '';
     target = ':root';
   }
 
@@ -230,6 +229,10 @@ const radioColor = function () {
     setDefaults();
     return styles;
   };
+
+  const clearStyles = () => {
+    styles = '';
+  }
 
   /**
    * Sets the target for the stylesheet
@@ -245,6 +248,7 @@ const radioColor = function () {
     setTokens,
     setTarget,
     setAttributes,
+    clearStyles,
     stylesheet,
   };
 };
