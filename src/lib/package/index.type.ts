@@ -1,5 +1,5 @@
 import type {Declaration} from 'css-tree';
-import type {Color} from './utils/range';
+import type {Color} from './utils/range/index.d';
 
 /**
  * @typedef {Object} ColorVariant
