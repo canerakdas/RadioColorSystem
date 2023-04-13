@@ -27,7 +27,7 @@ export const variants = {
       {
         count: 5,
         background: {h: color.h, s: color.s, l: 20 + color.l * 0.2},
-        foreground: {h: color.h, s: color.s , l: 10 + color.l * 0.2},
+        foreground: {h: color.h, s: color.s , l: 10 },
       },
     ];
   },
