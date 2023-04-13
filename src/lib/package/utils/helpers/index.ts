@@ -22,12 +22,12 @@ export const variants = {
       {
         count: 5,
         background: {h: color.h, s: color.s, l: 30 + color.l * 0.2},
-        foreground: {h: color.h, s: color.s, l: 20 + color.l * 0.2},
+        foreground: {h: color.h, s: color.s, l: 15 + color.l * 0.2},
       },
       {
         count: 5,
-        background: {h: color.h, s: color.s, l: 20 + color.l * 0.2},
-        foreground: {h: color.h, s: color.s , l: 10 },
+        background: {h: color.h, s: color.s, l: 15 + color.l * 0.2},
+        foreground: {h: color.h, s: color.s , l: 5 },
       },
     ];
   },
