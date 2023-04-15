@@ -1,6 +1,6 @@
 # Radio Color System
 
-A color library for Svelte.
+Color system for Svelte.
 
 Its main purpose is to create the background color palette with the given color and add text with the right contrast ratio on this background.
 
