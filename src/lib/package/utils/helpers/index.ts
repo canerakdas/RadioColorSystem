@@ -372,6 +372,7 @@ export function rgbToHsl(r: number, g: number, b: number): Color {
 export function colorToHsl(color: ColorInput): Color {
   if (typeof color === 'string' && color.startsWith('rgb')) {
     const rgb = color
+      .replace(/ /g, '')
       .replace('rgb', '')
       .replace('(', '')
       .replace(')', '')
