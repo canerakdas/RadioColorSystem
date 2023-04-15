@@ -1,6 +1,14 @@
 # Radio Color System
 
-Radio Color System is a library of dynamic colors and color utilities for Svelte, inspired by the Material Color System. With Radio Color System, you can easily add a consistent and visually appealing color scheme to your Svelte projects.
+A color library for Svelte.
+
+Its main purpose is to create the background color palette with the given color and add text with the right contrast ratio on this background.
+
+* Works independently of any design system and it has a single purpose.
+* Can dynamically create a color palette based on visual content.
+* Allows you to work asynchronously and gain from the colors that will come pre-loaded in your project.
+
+Plans to improve color inputs and outputs according to [css color 4](https://www.w3.org/TR/css-color-4/)
 
 ## Installation
 
@@ -64,7 +72,7 @@ To use RCS, import it into your Svelte component and create your color palette a
 </style>
 ```
 
-### Dynamic color
+### Content-based color palettes
 
 It takes the dominant hue value in the image and allows it to be used in the component.
 
@@ -75,9 +83,15 @@ It takes the dominant hue value in the image and allows it to be used in the com
 
 <RadioActive>
   <div class="dynamic-80">
-    <h3 class="dynamic-font-80">This is the dynamic color</h3>
+    <h3 class="dynamic-font-80">Dynamic color</h3>
     <img src="./image.png" alt="dynamic" />
   </div>
 </RadioActive>
 
 ```
+
+RadioActive allows the end user to edit the theme according to the content they are interacting with. You can use it for content that may be irrelevant to your color palette and provide a more personalized experience.
+
+It converts the color values in the current image to hsl format and groups them. Uses the dominant one of these colors, and expects the colors to be between a certain light and saturation value.
+
+If the image is not suitable for the algorithm, it will return the default color. More information about the exceptions; [CanvasRenderingContext2D: getImageData()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData#exceptions)
