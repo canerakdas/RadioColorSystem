@@ -10,6 +10,8 @@ Its main purpose is to create the background color palette with the given color 
 
 Plans to improve color inputs and outputs according to [css color 4](https://www.w3.org/TR/css-color-4/)
 
+## Docs & Demo
+[Radio Color](https://radio-color-system.vercel.app/)
 ## Installation
 
 To install rcs, simply add it to your project's dependencies:
