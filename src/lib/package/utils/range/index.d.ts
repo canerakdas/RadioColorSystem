@@ -24,6 +24,11 @@ export type Color = {
   l: number;
 };
 
+type RGB = `rgb(${number}, ${number}, ${number})`;
+type HEX = `#${string}`;
+
+export type ColorInput = Color | RGB | HEX;
+
 /**
   A range of colors.
   @typedef {Object} Range

@@ -1,4 +1,5 @@
 import adapter from '@sveltejs/adapter-auto';
+// eslint-disable-next-line node/no-missing-import
 import {vitePreprocess} from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */

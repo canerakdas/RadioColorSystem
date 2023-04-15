@@ -5,7 +5,7 @@
  * @property {(color: Color) => Object[]} light - Generates a light color variant.
  */
 
-import type {Color} from '../range/index.d';
+import type {Color, ColorInput} from '../range/index.d';
 
 /**
  * Generates color variants for dark and light themes.
@@ -27,7 +27,7 @@ export const variants = {
       {
         count: 5,
         background: {h: color.h, s: color.s, l: 15 + color.l * 0.1},
-        foreground: {h: color.h, s: color.s , l: 2 },
+        foreground: {h: color.h, s: color.s, l: 2},
       },
     ];
   },
@@ -367,4 +367,22 @@ export function rgbToHsl(r: number, g: number, b: number): Color {
     s: 100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0),
     l: (100 * (2 * l - s)) / 2,
   };
+}
+
+export function colorToHsl(color: ColorInput): Color {
+  if (typeof color === 'string' && color.startsWith('rgb')) {
+    const rgb = color
+      .replace('rgb', '')
+      .replace('(', '')
+      .replace(')', '')
+      .split(',')
+      .map(c => parseInt(c, 10));
+    return rgbToHsl(rgb[0], rgb[1], rgb[2]);
+  } else if (typeof color === 'string' && color.startsWith('#')) {
+    return hexToHsl(color) || {h: 0, s: 0, l: 0};
+  } else if (typeof color === 'object' && color.h && color.s && color.l) {
+    return color;
+  }
+
+  return {h: 0, s: 0, l: 0};
 }

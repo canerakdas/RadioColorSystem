@@ -1,5 +1,5 @@
 import type {Declaration} from 'css-tree';
-import type {Color} from './utils/range/index.d';
+import type {Color, ColorInput} from './utils/range/index.d';
 
 /**
  * @typedef {Object} ColorVariant
@@ -28,7 +28,7 @@ export type ColorVariant = (color: Color) => {
  * @property {ColorVariant} [ColorOptions.theme.lighten] - A function that returns an array of objects representing light color variants.
  */
 export type ColorOptions = {
-  color: Color;
+  color: ColorInput;
   prefix?: string;
   name?: string;
   suffix?: string;

@@ -7,7 +7,7 @@ import {generate} from 'css-tree';
 
 /* Utils */
 import colorRange from './utils/range';
-import {getTextColor, variants} from './utils/helpers';
+import {colorToHsl, getTextColor, variants} from './utils/helpers';
 import {getImageColor} from './utils/image';
 import toCssTree from './utils/cssTree';
 import cssToken from './utils/token';
@@ -62,10 +62,11 @@ const radioColor = function () {
       },
     } of colorsOptions) {
       const {darken = variants.dark, lighten = variants.light} = theme;
+      const hslColor = colorToHsl(color);
 
       const ranges = {
-        light: colorRange(lighten(color)),
-        dark: colorRange(darken(color)),
+        light: colorRange(lighten(hslColor)),
+        dark: colorRange(darken(hslColor)),
       };
 
       for (let i = 0; i < ranges.light.length; i++) {
@@ -213,13 +214,13 @@ const radioColor = function () {
   /**
    * Sets the default values
    */
-  const setDefaults = () =>{
+  const setDefaults = () => {
     attributes = [];
     classes = [];
     tokens.light = [];
     tokens.dark = [];
     target = ':root';
-  }
+  };
 
   /**
    * Returns the stylesheet
@@ -232,7 +233,7 @@ const radioColor = function () {
 
   const clearStyles = () => {
     styles = '';
-  }
+  };
 
   /**
    * Sets the target for the stylesheet
