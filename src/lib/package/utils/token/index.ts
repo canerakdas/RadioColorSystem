@@ -37,7 +37,7 @@ export function rgbColorSpace(color: Color): string {
  * @return {string} hsl or rgb formatted color as string
  */
 export function colorSpace(color: Color, gamut?: Gamut): string {
-  if (typeof gamut === 'undefined') return rgbColorSpace(color);
+  if (typeof gamut !== 'undefined') return rgbColorSpace(color);
 
   return hslColorSpace(color);
 }
