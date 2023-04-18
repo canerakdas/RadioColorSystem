@@ -44,7 +44,7 @@ export default function cssToken(
   let value = `hsl(var(--${tokenName}))`;
 
   if (typeof gamut !== 'undefined') {
-    value = `color(${gamut} --${tokenName});`;
+    value = `color(${gamut} var(--${tokenName}));`;
 
     if (dark) {
       return {
