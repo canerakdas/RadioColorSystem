@@ -1,5 +1,6 @@
 import type {Declaration} from 'css-tree';
-import type {Color, ColorInput} from './utils/range/index.d';
+import type {Color, ColorInput} from './utils/range';
+import type {Gamut} from './utils/token';
 
 /**
  * @typedef {Object} ColorVariant
@@ -42,6 +43,7 @@ export type ColorOptions = {
     darken?: ColorVariant;
     lighten?: ColorVariant;
   };
+  gamut?: Gamut;
 };
 
 /**

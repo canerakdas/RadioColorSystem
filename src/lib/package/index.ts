@@ -19,7 +19,8 @@ import type {
   Rule,
   TokenTheme,
   TokenNames,
-} from './index.type';
+} from './index.d';
+import type {Gamut} from './utils/token/index.d';
 
 /**
  * @typedef {Object} TokenTheme
@@ -60,6 +61,7 @@ const radioColor = function () {
         darken: variants.dark,
         lighten: variants.light,
       },
+      gamut,
     } of colorsOptions) {
       const {darken = variants.dark, lighten = variants.light} = theme;
       const hslColor = colorToHsl(color);
@@ -80,7 +82,8 @@ const radioColor = function () {
 
         setTokens(
           {dark: dark ? darkSegment : null, light: lightSegment, font},
-          names
+          names,
+          gamut
         );
 
         if (selector.attribute) setAttributes(names, font, selector.attribute);
@@ -112,37 +115,54 @@ const radioColor = function () {
    */
   const setTokens = (
     theme: TokenTheme,
-    {background, text}: TokenNames
+    {background, text}: TokenNames,
+    gamut?: Gamut
   ): void => {
     if (theme.dark) {
-      const {light, dark} = cssToken(background, {
-        light: theme.light,
-        dark: theme.dark,
-      });
+      const {light, dark} = cssToken(
+        background,
+        {
+          light: theme.light,
+          dark: theme.dark,
+        },
+        gamut
+      );
 
       tokens.light = [...tokens.light, ...light];
       if (dark) tokens.dark = [...tokens.dark, ...dark];
     } else {
-      const {light} = cssToken(background, {
-        light: theme.light,
-      });
+      const {light} = cssToken(
+        background,
+        {
+          light: theme.light,
+        },
+        gamut
+      );
 
       tokens.light = [...tokens.light, ...light];
     }
 
     if (theme.font) {
       if (theme.dark) {
-        const {light, dark} = cssToken(text, {
-          light: getTextColor(theme.light),
-          dark: getTextColor(theme.dark),
-        });
+        const {light, dark} = cssToken(
+          text,
+          {
+            light: getTextColor(theme.light),
+            dark: getTextColor(theme.dark),
+          },
+          gamut
+        );
 
         tokens.light = [...tokens.light, ...light];
         if (dark) tokens.dark = [...tokens.dark, ...dark];
       } else {
-        const {light} = cssToken(text, {
-          light: getTextColor(theme.light),
-        });
+        const {light} = cssToken(
+          text,
+          {
+            light: getTextColor(theme.light),
+          },
+          gamut
+        );
 
         tokens.light = [...tokens.light, ...light];
       }
