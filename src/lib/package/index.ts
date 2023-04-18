@@ -6,10 +6,11 @@
 import {generate} from 'css-tree';
 
 /* Utils */
-import colorRange from './utils/range';
 import {colorToHsl, getTextColor, variants} from './utils/helpers';
 import {getImageColor} from './utils/image';
-import toCssTree from './utils/cssTree';
+
+import range from './utils/range';
+import tree from './utils/cssTree';
 import cssToken from './utils/token';
 
 /* Type imports */
@@ -67,8 +68,8 @@ const radioColor = function () {
       const hslColor = colorToHsl(color);
 
       const ranges = {
-        light: colorRange(lighten(hslColor)),
-        dark: colorRange(darken(hslColor)),
+        light: range(lighten(hslColor)),
+        dark: range(darken(hslColor)),
       };
 
       for (let i = 0; i < ranges.light.length; i++) {
@@ -91,7 +92,7 @@ const radioColor = function () {
       }
     }
 
-    const {light, dark} = toCssTree.tokens.scheme;
+    const {light, dark} = tree.tokens.scheme;
 
     styles = generate({
       type: 'StyleSheet',
@@ -183,7 +184,7 @@ const radioColor = function () {
   ): void => {
     if (selector) {
       attributes.push(
-        toCssTree.selector(
+        tree.selector(
           {
             type: 'Identifier',
             name: background,
@@ -195,7 +196,7 @@ const radioColor = function () {
 
       if (font) {
         attributes.push(
-          toCssTree.selector(
+          tree.selector(
             {
               type: 'Identifier',
               name: text,
@@ -222,11 +223,11 @@ const radioColor = function () {
   ): void => {
     if (selector) {
       classes.push(
-        toCssTree.selector(background, 'background-color', 'ClassSelector')
+        tree.selector(background, 'background-color', 'ClassSelector')
       );
 
       if (font) {
-        classes.push(toCssTree.selector(text, 'color', 'ClassSelector'));
+        classes.push(tree.selector(text, 'color', 'ClassSelector'));
       }
     }
   };

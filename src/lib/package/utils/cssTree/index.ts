@@ -5,6 +5,7 @@
  */
 
 import type {Declaration, PseudoClassSelector} from 'css-tree';
+
 import {SelectorType} from './index.d';
 
 /**
@@ -45,7 +46,7 @@ export const normalizeSelector = (target: string): string => {
   }
 };
 
-const toCssTree = {
+const tree = {
   /**
    * Creates a CSS declaration token.
    * @param {string} token - The name of the CSS property.
@@ -229,4 +230,4 @@ const toCssTree = {
   },
 };
 
-export default toCssTree;
+export default tree;

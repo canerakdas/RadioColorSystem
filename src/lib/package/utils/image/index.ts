@@ -1,9 +1,10 @@
 /**
  * @fileoverview Image to color utilities.
  */
-import type {ColorOptions} from '../..';
-import {rgbToHsl} from '../helpers';
+import type {ColorOptions} from '../../index.d';
 import type {ImageColor} from './index.d';
+
+import {rgbToHsl} from '../helpers';
 
 /**
  * Gets the dominant color of an image within a specified area, based on a set of limits.
