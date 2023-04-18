@@ -13,7 +13,7 @@ import {SelectorType} from './index.d';
  * @param {string} target The target string to check.
  * @returns {string} The type of CSS selector.
  */
-export const getSelectorType = (target: string): SelectorType => {
+export function getSelectorType(target: string): SelectorType {
   switch (target[0]) {
     case ':':
       return SelectorType.PseudoClassSelector;
@@ -26,14 +26,14 @@ export const getSelectorType = (target: string): SelectorType => {
     default:
       return SelectorType.PseudoClassSelector;
   }
-};
+}
 
 /**
  * Normalizes the provided CSS selector by removing any prefix that indicates the type of selector.
  * @param {string} target The CSS selector to normalize.
  * @returns {string} The normalized CSS selector.
  */
-export const normalizeSelector = (target: string): string => {
+export function normalizeSelector(target: string): string {
   switch (target[0]) {
     case ':':
     case '#':
@@ -44,7 +44,7 @@ export const normalizeSelector = (target: string): string => {
     default:
       return target;
   }
-};
+}
 
 const tree = {
   /**
