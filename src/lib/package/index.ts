@@ -10,7 +10,7 @@ import {colorToHsl, getTextColor, variants} from './utils/helpers';
 import {getImageColor} from './utils/image';
 
 import range from './utils/range';
-import tree from './utils/cssTree';
+import tree from './utils/tree';
 import cssToken from './utils/token';
 
 /* Type imports */
