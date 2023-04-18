@@ -5,7 +5,7 @@
  * @property {(color: Color) => Object[]} light - Generates a light color variant.
  */
 
-import type {Color, ColorInput} from '../range/index.d';
+import type {Color, ColorInput} from '../range/types';
 
 /**
  * Generates color variants for dark and light themes.

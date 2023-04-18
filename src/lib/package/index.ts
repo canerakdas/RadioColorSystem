@@ -11,7 +11,7 @@ import {getImageColor} from './utils/image';
 
 import range from './utils/range';
 import tree from './utils/tree';
-import cssToken from './utils/token';
+import token from './utils/token';
 
 /* Type imports */
 import type {
@@ -20,8 +20,8 @@ import type {
   Rule,
   TokenTheme,
   TokenNames,
-} from './index.d';
-import type {Gamut} from './utils/token/index.d';
+} from './types';
+import type {Gamut} from './utils/token/types';
 
 /**
  * @typedef {Object} TokenTheme
@@ -53,7 +53,7 @@ const radioColor = function () {
     for (const {
       prefix = '',
       color,
-      name = 'primary',
+      name,
       suffix = '',
       dark = true,
       font = true,
@@ -120,7 +120,7 @@ const radioColor = function () {
     gamut?: Gamut
   ): void => {
     if (theme.dark) {
-      const {light, dark} = cssToken(
+      const {light, dark} = token(
         background,
         {
           light: theme.light,
@@ -132,7 +132,7 @@ const radioColor = function () {
       tokens.light = [...tokens.light, ...light];
       if (dark) tokens.dark = [...tokens.dark, ...dark];
     } else {
-      const {light} = cssToken(
+      const {light} = token(
         background,
         {
           light: theme.light,
@@ -145,7 +145,7 @@ const radioColor = function () {
 
     if (theme.font) {
       if (theme.dark) {
-        const {light, dark} = cssToken(
+        const {light, dark} = token(
           text,
           {
             light: getTextColor(theme.light),
@@ -157,7 +157,7 @@ const radioColor = function () {
         tokens.light = [...tokens.light, ...light];
         if (dark) tokens.dark = [...tokens.dark, ...dark];
       } else {
-        const {light} = cssToken(
+        const {light} = token(
           text,
           {
             light: getTextColor(theme.light),
@@ -252,6 +252,9 @@ const radioColor = function () {
     return styles;
   };
 
+  /**
+   * Clears the styles
+   */
   const clearStyles = () => {
     styles = '';
   };

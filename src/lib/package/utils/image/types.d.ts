@@ -1,4 +1,4 @@
-import type {ColorOptions} from '../..';
+import type {ColorOptions} from '../../types';
 
 export type ImageColor = {
   name: string;

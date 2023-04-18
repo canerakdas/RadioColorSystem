@@ -1,8 +1,8 @@
 /**
  * @fileoverview Image to color utilities.
  */
-import type {ColorOptions} from '../../index.d';
-import type {ImageColor} from './index.d';
+import type {ColorOptions} from '../../types';
+import type {ImageColor} from './types';
 
 import {rgbToHsl} from '../helpers';
 

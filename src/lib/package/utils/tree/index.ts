@@ -6,7 +6,7 @@
 
 import type {Declaration, PseudoClassSelector} from 'css-tree';
 
-import {SelectorType} from './index.d';
+import {SelectorType} from './enums';
 
 /**
  * Returns the type of CSS selector based on the provided target string.

@@ -4,8 +4,8 @@
 import tree from '../tree';
 import {hslToRgb} from '../helpers';
 
-import type {Color} from '../range/index.d';
-import type {Gamut, TokenColors} from './index.d';
+import type {Color} from '../range/types';
+import type {Gamut, TokenColors} from './types';
 
 /**
  * Converts a color object to a string.

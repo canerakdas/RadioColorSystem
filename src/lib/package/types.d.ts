@@ -1,6 +1,6 @@
 import type {Declaration} from 'css-tree';
-import type {Color, ColorInput} from './utils/range';
-import type {Gamut} from './utils/token';
+import type {Color, ColorInput} from './utils/range/types';
+import type {Gamut} from './utils/token/types';
 
 /**
  * @typedef {Object} ColorVariant
@@ -31,7 +31,7 @@ export type ColorVariant = (color: Color) => {
 export type ColorOptions = {
   color: ColorInput;
   prefix?: string;
-  name?: string;
+  name?: string | string[];
   suffix?: string;
   dark?: boolean;
   font?: boolean;
