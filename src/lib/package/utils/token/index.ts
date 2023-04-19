@@ -4,6 +4,7 @@
 import tree from '../tree';
 import {hslToRgb} from '../helpers';
 
+import type {Declaration} from 'css-tree';
 import type {Color} from '../range/types';
 import type {Gamut, TokenColors} from './types';
 
@@ -57,7 +58,7 @@ export default function cssToken(
   name: string,
   {light, dark}: TokenColors,
   gamut?: Gamut
-) {
+): {light: Declaration[]; dark: Declaration[] | null} {
   const {token} = tree;
   const tokenName = `${name}-token`;
   let value = `hsl(var(--${tokenName}))`;
