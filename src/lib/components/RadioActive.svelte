@@ -2,11 +2,11 @@
   import {onMount} from 'svelte';
 
   import radioColor, {getImageColor} from '../package/index';
-  import type {ColorOptions} from '../package/index.type';
+  import type {ColorConfiguration} from '../package/index.type';
 
   export let target = '';
   export let async = false;
-  export let color: ColorOptions = {
+  export let color: ColorConfiguration = {
     color: {h: 0, s: 0, l: 50},
     name: 'dynamic',
   };
@@ -31,7 +31,7 @@
     getImageColor({
       name: color.name || '',
       target: target,
-      callback: (c: ColorOptions) => {
+      callback: (c: ColorConfiguration) => {
         setColors([{...color, ...{color: c.color}}]);
         style = stylesheet();
       },

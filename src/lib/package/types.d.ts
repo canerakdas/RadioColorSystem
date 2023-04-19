@@ -14,21 +14,21 @@ export type ColorVariant = (color: Color) => {
 }[];
 
 /**
- * @typedef {Object} ColorOptions
- * @property {Color} ColorOptions.color - The base color to use for generatingthe color variants.
- * @property {string} [ColorOptions.prefix] - A prefix to use when generating token names.
- * @property {string} [ColorOptions.name='primary'] - A name to use when generating token names.
- * @property {string} [ColorOptions.suffix] - A suffix to use when generating token names.
- * @property {boolean} [ColorOptions.dark=true] - Whether to generate dark color variants.
- * @property {boolean} [ColorOptions.font=true] - Whether to generate font color variants.
- * @property {Object} [ColorOptions.selector] - An object specifying which selectors to generate.
- * @property {boolean} [ColorOptions.selector.attribute=true] - Whether to generate attribute selectors.
- * @property {boolean} [ColorOptions.selector.class=true] - Whether to generate class selectors.
- * @property {Object} [ColorOptions.theme] - An object specifying color variants to use when generating token styles.
- * @property {ColorVariant} [ColorOptions.theme.darken] - A function that returns an array of objects representing dark color variants.
- * @property {ColorVariant} [ColorOptions.theme.lighten] - A function that returns an array of objects representing light color variants.
+ * @typedef {Object} ColorConfiguration
+ * @property {Color} ColorConfiguration.color - The base color to use for generatingthe color variants.
+ * @property {string} [ColorConfiguration.prefix] - A prefix to use when generating token names.
+ * @property {string} [ColorConfiguration.name='primary'] - A name to use when generating token names.
+ * @property {string} [ColorConfiguration.suffix] - A suffix to use when generating token names.
+ * @property {boolean} [ColorConfiguration.dark=true] - Whether to generate dark color variants.
+ * @property {boolean} [ColorConfiguration.font=true] - Whether to generate font color variants.
+ * @property {Object} [ColorConfiguration.selector] - An object specifying which selectors to generate.
+ * @property {boolean} [ColorConfiguration.selector.attribute=true] - Whether to generate attribute selectors.
+ * @property {boolean} [ColorConfiguration.selector.class=true] - Whether to generate class selectors.
+ * @property {Object} [ColorConfiguration.theme] - An object specifying color variants to use when generating token styles.
+ * @property {ColorVariant} [ColorConfiguration.theme.darken] - A function that returns an array of objects representing dark color variants.
+ * @property {ColorVariant} [ColorConfiguration.theme.lighten] - A function that returns an array of objects representing light color variants.
  */
-export type ColorOptions = {
+export type ColorConfiguration = {
   color: ColorInput;
   prefix?: string;
   name?: string | string[];

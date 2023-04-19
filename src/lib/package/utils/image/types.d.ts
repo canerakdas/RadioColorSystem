@@ -1,4 +1,4 @@
-import type {ColorOptions} from '../../types';
+import type {ColorConfiguration} from '../../types';
 
 export type ImageColor = {
   name: string;
@@ -17,7 +17,7 @@ export type ImageColor = {
       lt: number;
     };
   };
-  callback: (c: ColorOptions) => void;
+  callback: (c: ColorConfiguration) => void;
   quality?: number;
   position?: {
     cx: number;

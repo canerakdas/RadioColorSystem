@@ -1,7 +1,7 @@
 /**
  * @fileoverview Image to color utilities.
  */
-import type {ColorOptions} from '../../types';
+import type {ColorConfiguration} from '../../types';
 import type {ImageColor} from './types';
 
 import {rgbToHsl} from '../helpers';
@@ -132,10 +132,10 @@ export function getImageColor({
 
       callback({
         color: rgbToHsl(dominant[0], dominant[1], dominant[2]),
-      } as ColorOptions);
+      } as ColorConfiguration);
     };
   } catch (error) {
     console.error(error);
-    callback({color: {h: 0, s: 0, l: 0}} as ColorOptions);
+    callback({color: {h: 0, s: 0, l: 0}} as ColorConfiguration);
   }
 }

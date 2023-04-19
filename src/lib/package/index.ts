@@ -16,7 +16,7 @@ import token from './utils/token';
 /* Type imports */
 import type {
   TokenScheme,
-  ColorOptions,
+  ColorConfiguration,
   Rule,
   TokenTheme,
   TokenNames,
@@ -46,10 +46,10 @@ const radioColor = function () {
 
   /**
    * Sets the colors for the color system
-   * @param {ColorOptions[]} colorsOptions - An array of color options
+   * @param {ColorConfiguration[]} configuration - An array of color options
    * @returns {void}
    */
-  const setColors = (colorsOptions: ColorOptions[]): void => {
+  const setColors = (configuration: ColorConfiguration[]): void => {
     for (const {
       prefix = '',
       color,
@@ -63,7 +63,7 @@ const radioColor = function () {
         lighten: variants.light,
       },
       gamut,
-    } of colorsOptions) {
+    } of configuration) {
       const {darken = variants.dark, lighten = variants.light} = theme;
       const hslColor = colorToHsl(color);
 
