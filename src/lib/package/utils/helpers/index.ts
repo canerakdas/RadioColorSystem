@@ -381,7 +381,12 @@ export function colorToHsl(color: ColorInput): Color {
     return rgbToHsl(rgb[0], rgb[1], rgb[2]);
   } else if (typeof color === 'string' && color.startsWith('#')) {
     return hexToHsl(color) || {h: 0, s: 0, l: 0};
-  } else if (typeof color === 'object' && color.h && color.s && color.l) {
+  } else if (
+    typeof color === 'object' &&
+    color.h >= 0 &&
+    color.s >= 0 &&
+    color.l >= 0
+  ) {
     return color;
   }
 
