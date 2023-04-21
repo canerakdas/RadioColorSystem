@@ -22,6 +22,7 @@ import type {
   TokenNames,
 } from './types';
 import type {Gamut} from './utils/token/types';
+import setHarmonies from './utils/harmony';
 
 /**
  * @typedef {Object} TokenTheme
@@ -50,22 +51,30 @@ const radioColor = function () {
    * @returns {void}
    */
   const setColors = (configuration: ColorConfiguration[]): void => {
-    for (const {
-      prefix = '',
-      color,
-      name,
-      suffix = '',
-      dark = true,
-      font = true,
-      selector = {attribute: true, class: true},
-      theme = {
-        darken: variants.dark,
-        lighten: variants.light,
-      },
-      gamut,
-    } of configuration) {
+    for (let c = 0; c < configuration.length; c++) {
+      const {
+        prefix = '',
+        color,
+        name,
+        suffix = '',
+        dark = true,
+        font = true,
+        selector = {attribute: true, class: true},
+        theme = {
+          darken: variants.dark,
+          lighten: variants.light,
+        },
+        gamut,
+        harmony,
+      } = configuration[c];
       const {darken = variants.dark, lighten = variants.light} = theme;
       const hslColor = colorToHsl(color);
+
+      if (Array.isArray(name) === true && typeof name !== 'undefined') {
+        setHarmonies(name, harmony, hslColor, configuration[c], setColors);
+
+        return;
+      }
 
       const ranges = {
         light: range(lighten(hslColor)),

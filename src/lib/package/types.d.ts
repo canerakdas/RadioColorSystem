@@ -44,6 +44,13 @@ export type ColorConfiguration = {
     lighten?: ColorVariant;
   };
   gamut?: Gamut;
+  harmony?:
+    | 'triadic'
+    | 'complementary'
+    | 'splitComplementary'
+    | 'tetradic'
+    | 'square'
+    | 'analogous';
 };
 
 /**
