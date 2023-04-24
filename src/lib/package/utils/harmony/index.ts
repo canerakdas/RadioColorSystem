@@ -36,7 +36,7 @@ function setHarmonies(
       .map((_, i) => (i * 360) / name.length);
 
     if (typeof harmony !== 'undefined') {
-      if (name.length === harmonies[harmony].length) {
+      if (name.length <= harmonies[harmony].length) {
         cursor = harmonies[harmony];
       } else {
         console.warn('The number of colors must match the number of harmonies');
