@@ -4,7 +4,7 @@
 import type {ColorConfiguration} from '../../types';
 import type {ImageColor} from './types';
 
-import {rgbToHsl} from '../helpers';
+import {rgbToHsl} from '../helpers/color';
 
 // Initial values for the image color method.
 const initial = {
