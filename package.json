@@ -32,7 +32,7 @@
       "command": "sed -i '' '/RadioColorSystem/dist/package/d' ./src/documentation.json"
     },
     "doc:stash":{
-      "command": "git stash && git checkout gh-pages && git stash pop"
+      "command": "git stash && git checkout documentation && git stash pop"
     },
     "kit:sync":{
       "command": "svelte-kit sync"
