@@ -26,10 +26,7 @@
       "command": "vite preview"
     },
     "doc:prepare": {
-      "command": "jsdoc -c ./jsdoc.config.json -X > ./src/documentation.json"
-    },
-    "doc:clear":{
-      "command": "sed -i '' '/RadioColorSystem\/dist\/package/g' ./src/documentation.json"
+      "command": "jsdoc -c ./jsdoc.config.json -X > ./src/documentation.json && sed -i '' '/dist/d' ./src/documentation.json"
     },
     "doc:stash":{
       "command": "git stash && git checkout documentation && git stash pop"
@@ -71,7 +68,6 @@
     "doc": {
       "dependencies":[
         "doc:prepare",
-        "doc:clear",
         "doc:stash"
       ]
     },
