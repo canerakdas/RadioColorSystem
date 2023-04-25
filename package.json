@@ -29,7 +29,7 @@
       "command": "jsdoc -c ./jsdoc.config.json -X > ./src/documentation.json"
     },
     "doc:clear":{
-      "command": "sed -i '' '/RadioColorSystem/dist/package/d' ./src/documentation.json"
+      "command": "sed -i '' '/RadioColorSystem\/dist\/package/g' ./src/documentation.json"
     },
     "doc:stash":{
       "command": "git stash && git checkout documentation && git stash pop"
