@@ -67,8 +67,7 @@
     },
     "doc": {
       "dependencies":[
-        "doc:prepare",
-        "doc:stash"
+        "doc:prepare"
       ]
     },
     "check":{
