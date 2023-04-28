@@ -13,109 +13,113 @@
     "clean": "wireit",
     "fix": "wireit",
     "test": "wireit",
-    "doc": "wireit"
+    "doc": "wireit",
+    "changelog": "wireit"
   },
   "wireit": {
-    "vite:dev":{
+    "vite:dev": {
       "command": "vite dev"
     },
-    "vite:build":{
+    "vite:build": {
       "command": "vite build"
     },
-    "vite:preview":{
+    "vite:preview": {
       "command": "vite preview"
     },
     "doc:prepare": {
       "command": "jsdoc -c ./jsdoc.config.json -X > ./src/documentation.json && sed -i '' '/dist/d' ./src/documentation.json"
     },
-    "doc:stash":{
+    "doc:stash": {
       "command": "git stash && git checkout documentation && git stash pop"
     },
-    "kit:sync":{
+    "kit:sync": {
       "command": "svelte-kit sync"
     },
-    "kit:check":{
+    "kit:check": {
       "command": "svelte-check --tsconfig ./tsconfig.json"
     },
-    "kit:package":{
+    "kit:package": {
       "command": "svelte-package"
     },
-    "npm:package":{
+    "npm:package": {
       "command": "npm package"
     },
-    "gts:lint":{
+    "gts:lint": {
       "command": "gts lint"
     },
-    "gts:clean":{
+    "gts:clean": {
       "command": "gts clean"
     },
-    "gts:fix":{
+    "gts:fix": {
       "command": "gts fix"
     },
-    "jest":{
+    "jest": {
       "command": "jest"
     },
-    "publint":{
+    "publint": {
       "command": "publint"
     },
-    "package":{
-      "dependencies":[
+    "package": {
+      "dependencies": [
         "kit:sync",
         "kit:package",
         "publint"
       ]
     },
     "doc": {
-      "dependencies":[
+      "dependencies": [
         "doc:prepare"
       ]
     },
-    "check":{
-      "dependencies":[
+    "check": {
+      "dependencies": [
         "kit:sync",
         "kit:check"
       ]
     },
-    "dev":{
-      "dependencies":[
+    "dev": {
+      "dependencies": [
         "vite:dev"
       ]
     },
-    "build":{
-      "dependencies":[
+    "build": {
+      "dependencies": [
         "vite:build",
         "npm:package"
       ]
     },
-    "preview":{
-      "dependencies":[
+    "preview": {
+      "dependencies": [
         "vite:preview"
       ]
     },
-    "prepublishOnly":{
-      "dependencies":[
+    "prepublishOnly": {
+      "dependencies": [
         "npm:package"
       ]
     },
-    "lint":{
-      "dependencies":[
+    "lint": {
+      "dependencies": [
         "gts:lint"
       ]
     },
-    "clean":{
-      "dependencies":[
+    "clean": {
+      "dependencies": [
         "gts:clean"
       ]
     },
-    "fix":{
-      "dependencies":[
+    "fix": {
+      "dependencies": [
         "gts:fix"
       ]
     },
-    "test":{
-      "dependencies":[
+    "test": {
+      "dependencies": [
         "jest"
       ]
+    },
+    "changelog": {
+      "command": "auto-changelog -p"
     }
   },
   "exports": {
@@ -164,5 +168,11 @@
     "color",
     "palette",
     "color-system"
-  ]
+  ],
+  "auto-changelog": {
+    "output": "CHANGELOG.md",
+    "template": "keepachangelog",
+    "unreleased": true,
+    "commitLimit": true
+  }
 }
