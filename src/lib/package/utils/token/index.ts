@@ -2,7 +2,7 @@
  * @fileoverview A file for creating tokens for a CSS color scheme.
  */
 import tree from '../tree';
-import {hslToRgb} from '../helpers';
+import {hslToRgb} from '../helpers/color';
 
 import type {Declaration} from 'css-tree';
 import type {Color} from '../range/types';

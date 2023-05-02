@@ -6,7 +6,8 @@
 import {generate} from 'css-tree';
 
 /* Utils */
-import {colorToHsl, getTextColor, variants} from './utils/helpers';
+import {getTextColor, variants} from './utils/helpers';
+import {colorToHsl} from './utils/helpers/color';
 import {getImageColor} from './utils/image';
 
 import range from './utils/range';
