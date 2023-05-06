@@ -3,17 +3,124 @@
   "version": "0.1.7",
   "license": "MIT",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build && npm run package",
-    "preview": "vite preview",
-    "package": "svelte-kit sync && svelte-package && publint",
-    "prepublishOnly": "npm run package",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "lint": "gts lint",
-    "clean": "gts clean",
-    "fix": "gts fix",
-    "test": "jest"
+    "dev": "wireit",
+    "build": "wireit",
+    "preview": "wireit",
+    "package": "wireit",
+    "prepublishOnly": "wireit",
+    "check": "wireit",
+    "lint": "wireit",
+    "clean": "wireit",
+    "fix": "wireit",
+    "test": "wireit",
+    "doc": "wireit",
+    "changelog": "wireit"
+  },
+  "wireit": {
+    "vite:dev": {
+      "command": "vite dev"
+    },
+    "vite:build": {
+      "command": "vite build"
+    },
+    "vite:preview": {
+      "command": "vite preview"
+    },
+    "doc:prepare": {
+      "command": "jsdoc -c ./jsdoc.config.json -X > ./src/documentation.json && sed -i '' '/dist/d' ./src/documentation.json"
+    },
+    "doc:stash": {
+      "command": "git stash && git checkout documentation && git stash pop"
+    },
+    "kit:sync": {
+      "command": "svelte-kit sync"
+    },
+    "kit:check": {
+      "command": "svelte-check --tsconfig ./tsconfig.json"
+    },
+    "kit:package": {
+      "command": "svelte-package"
+    },
+    "npm:package": {
+      "command": "npm package"
+    },
+    "gts:lint": {
+      "command": "gts lint"
+    },
+    "gts:clean": {
+      "command": "gts clean"
+    },
+    "gts:fix": {
+      "command": "gts fix"
+    },
+    "jest": {
+      "command": "jest"
+    },
+    "publint": {
+      "command": "publint"
+    },
+    "package": {
+      "dependencies": [
+        "kit:sync",
+        "kit:package",
+        "publint"
+      ]
+    },
+    "doc": {
+      "dependencies": [
+        "doc:prepare"
+      ]
+    },
+    "check": {
+      "dependencies": [
+        "kit:sync",
+        "kit:check"
+      ]
+    },
+    "dev": {
+      "dependencies": [
+        "vite:dev"
+      ]
+    },
+    "build": {
+      "dependencies": [
+        "vite:build",
+        "npm:package"
+      ]
+    },
+    "preview": {
+      "dependencies": [
+        "vite:preview"
+      ]
+    },
+    "prepublishOnly": {
+      "dependencies": [
+        "npm:package"
+      ]
+    },
+    "lint": {
+      "dependencies": [
+        "gts:lint"
+      ]
+    },
+    "clean": {
+      "dependencies": [
+        "gts:clean"
+      ]
+    },
+    "fix": {
+      "dependencies": [
+        "gts:fix"
+      ]
+    },
+    "test": {
+      "dependencies": [
+        "jest"
+      ]
+    },
+    "changelog": {
+      "command": "auto-changelog -p"
+    }
   },
   "exports": {
     ".": {
@@ -47,7 +154,8 @@
     "ts-node": "^10.9.1",
     "tslib": "^2.4.1",
     "typescript": "^5.0.0",
-    "vite": "^4.2.0"
+    "vite": "^4.2.0",
+    "wireit": "^0.9.5"
   },
   "svelte": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -60,5 +168,11 @@
     "color",
     "palette",
     "color-system"
-  ]
+  ],
+  "auto-changelog": {
+    "output": "CHANGELOG.md",
+    "template": "keepachangelog",
+    "unreleased": true,
+    "commitLimit": true
+  }
 }
