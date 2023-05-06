@@ -73,6 +73,7 @@ const radioColor = function () {
 
       if (Array.isArray(name) === true && typeof name !== 'undefined') {
         setHarmonies(name, harmony, hslColor, configuration[c], setColors);
+        setColors(configuration.slice(c + 1));
 
         return;
       }
