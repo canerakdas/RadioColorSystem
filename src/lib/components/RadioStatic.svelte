@@ -1,9 +1,9 @@
 <script lang="ts">
   import radioColor from '../package/index';
-  import type {ColorOptions} from '../package/index.type';
+  import type {ColorConfiguration} from '../package/index.type';
   import {onMount} from 'svelte';
 
-  export let colors: ColorOptions[] = [];
+  export let colors: ColorConfiguration[] = [];
   export let target = '';
   export let async = false;
   let style = '';

@@ -6,20 +6,24 @@
 import {generate} from 'css-tree';
 
 /* Utils */
-import colorRange from './utils/range';
-import {colorToHsl, getTextColor, variants} from './utils/helpers';
+import {getTextColor, variants} from './utils/helpers';
+import {colorToHsl} from './utils/helpers/color';
 import {getImageColor} from './utils/image';
-import toCssTree from './utils/cssTree';
-import cssToken from './utils/token';
+
+import range from './utils/range';
+import tree from './utils/tree';
+import token from './utils/token';
 
 /* Type imports */
 import type {
   TokenScheme,
-  ColorOptions,
+  ColorConfiguration,
   Rule,
   TokenTheme,
   TokenNames,
-} from './index.type';
+} from './types';
+import type {Gamut} from './utils/token/types';
+import setHarmonies from './utils/harmony';
 
 /**
  * @typedef {Object} TokenTheme
@@ -44,29 +48,39 @@ const radioColor = function () {
 
   /**
    * Sets the colors for the color system
-   * @param {ColorOptions[]} colorsOptions - An array of color options
+   * @param {ColorConfiguration[]} configuration - An array of color options
    * @returns {void}
    */
-  const setColors = (colorsOptions: ColorOptions[]): void => {
-    for (const {
-      prefix = '',
-      color,
-      name = 'primary',
-      suffix = '',
-      dark = true,
-      font = true,
-      selector = {attribute: true, class: true},
-      theme = {
-        darken: variants.dark,
-        lighten: variants.light,
-      },
-    } of colorsOptions) {
+  const setColors = (configuration: ColorConfiguration[]): void => {
+    for (let c = 0; c < configuration.length; c++) {
+      const {
+        prefix = '',
+        color,
+        name,
+        suffix = '',
+        dark = true,
+        font = true,
+        selector = {attribute: true, class: true},
+        theme = {
+          darken: variants.dark,
+          lighten: variants.light,
+        },
+        gamut,
+        harmony,
+      } = configuration[c];
       const {darken = variants.dark, lighten = variants.light} = theme;
       const hslColor = colorToHsl(color);
 
+      if (Array.isArray(name) === true && typeof name !== 'undefined') {
+        setHarmonies(name, harmony, hslColor, configuration[c], setColors);
+        setColors(configuration.slice(c + 1));
+
+        return;
+      }
+
       const ranges = {
-        light: colorRange(lighten(hslColor)),
-        dark: colorRange(darken(hslColor)),
+        light: range(lighten(hslColor)),
+        dark: range(darken(hslColor)),
       };
 
       for (let i = 0; i < ranges.light.length; i++) {
@@ -80,7 +94,8 @@ const radioColor = function () {
 
         setTokens(
           {dark: dark ? darkSegment : null, light: lightSegment, font},
-          names
+          names,
+          gamut
         );
 
         if (selector.attribute) setAttributes(names, font, selector.attribute);
@@ -88,7 +103,7 @@ const radioColor = function () {
       }
     }
 
-    const {light, dark} = toCssTree.tokens.scheme;
+    const {light, dark} = tree.tokens.scheme;
 
     styles = generate({
       type: 'StyleSheet',
@@ -112,37 +127,54 @@ const radioColor = function () {
    */
   const setTokens = (
     theme: TokenTheme,
-    {background, text}: TokenNames
+    {background, text}: TokenNames,
+    gamut?: Gamut
   ): void => {
     if (theme.dark) {
-      const {light, dark} = cssToken(background, {
-        light: theme.light,
-        dark: theme.dark,
-      });
+      const {light, dark} = token(
+        background,
+        {
+          light: theme.light,
+          dark: theme.dark,
+        },
+        gamut
+      );
 
       tokens.light = [...tokens.light, ...light];
       if (dark) tokens.dark = [...tokens.dark, ...dark];
     } else {
-      const {light} = cssToken(background, {
-        light: theme.light,
-      });
+      const {light} = token(
+        background,
+        {
+          light: theme.light,
+        },
+        gamut
+      );
 
       tokens.light = [...tokens.light, ...light];
     }
 
     if (theme.font) {
       if (theme.dark) {
-        const {light, dark} = cssToken(text, {
-          light: getTextColor(theme.light),
-          dark: getTextColor(theme.dark),
-        });
+        const {light, dark} = token(
+          text,
+          {
+            light: getTextColor(theme.light),
+            dark: getTextColor(theme.dark),
+          },
+          gamut
+        );
 
         tokens.light = [...tokens.light, ...light];
         if (dark) tokens.dark = [...tokens.dark, ...dark];
       } else {
-        const {light} = cssToken(text, {
-          light: getTextColor(theme.light),
-        });
+        const {light} = token(
+          text,
+          {
+            light: getTextColor(theme.light),
+          },
+          gamut
+        );
 
         tokens.light = [...tokens.light, ...light];
       }
@@ -163,7 +195,7 @@ const radioColor = function () {
   ): void => {
     if (selector) {
       attributes.push(
-        toCssTree.selector(
+        tree.selector(
           {
             type: 'Identifier',
             name: background,
@@ -175,7 +207,7 @@ const radioColor = function () {
 
       if (font) {
         attributes.push(
-          toCssTree.selector(
+          tree.selector(
             {
               type: 'Identifier',
               name: text,
@@ -202,11 +234,11 @@ const radioColor = function () {
   ): void => {
     if (selector) {
       classes.push(
-        toCssTree.selector(background, 'background-color', 'ClassSelector')
+        tree.selector(background, 'background-color', 'ClassSelector')
       );
 
       if (font) {
-        classes.push(toCssTree.selector(text, 'color', 'ClassSelector'));
+        classes.push(tree.selector(text, 'color', 'ClassSelector'));
       }
     }
   };
@@ -231,6 +263,9 @@ const radioColor = function () {
     return styles;
   };
 
+  /**
+   * Clears the styles
+   */
   const clearStyles = () => {
     styles = '';
   };
