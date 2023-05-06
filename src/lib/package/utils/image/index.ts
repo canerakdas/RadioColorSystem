@@ -1,9 +1,34 @@
 /**
  * @fileoverview Image to color utilities.
  */
-import type {ColorOptions} from '../..';
-import {rgbToHsl} from '../helpers';
-import type {ImageColor} from './index.d';
+import type {ColorConfiguration} from '../../types';
+import type {ImageColor} from './types';
+
+import {rgbToHsl} from '../helpers/color';
+
+// Initial values for the image color method.
+const initial = {
+  limits: {
+    light: {
+      gt: 20,
+      lt: 80,
+    },
+    saturation: {
+      gt: 20,
+      lt: 90,
+    },
+    hue: {
+      gt: 0,
+      lt: 360,
+    },
+  },
+  position: {
+    cx: 0,
+    cy: 0,
+    width: 100,
+    height: 100,
+  },
+};
 
 /**
  * Gets the dominant color of an image within a specified area, based on a set of limits.
@@ -31,28 +56,10 @@ import type {ImageColor} from './index.d';
 export function getImageColor({
   name,
   target,
-  limits = {
-    light: {
-      gt: 20,
-      lt: 80,
-    },
-    saturation: {
-      gt: 20,
-      lt: 90,
-    },
-    hue: {
-      gt: 0,
-      lt: 360,
-    },
-  },
+  limits = initial.limits,
   callback,
   quality = 10,
-  position = {
-    cx: 0,
-    cy: 0,
-    width: 100,
-    height: 100,
-  },
+  position = initial.position,
 }: ImageColor) {
   try {
     const {src} = document.querySelector(
@@ -131,10 +138,10 @@ export function getImageColor({
 
       callback({
         color: rgbToHsl(dominant[0], dominant[1], dominant[2]),
-      } as ColorOptions);
+      } as ColorConfiguration);
     };
   } catch (error) {
     console.error(error);
-    callback({color: {h: 0, s: 0, l: 0}} as ColorOptions);
+    callback({color: {h: 0, s: 0, l: 0}} as ColorConfiguration);
   }
 }
