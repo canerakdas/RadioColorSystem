@@ -6,7 +6,8 @@
 import {generate} from 'css-tree';
 
 /* Utils */
-import {colorToHsl, getTextColor, variants} from './utils/helpers';
+import {getTextColor, variants} from './utils/helpers';
+import {colorToHsl} from './utils/helpers/color';
 import {getImageColor} from './utils/image';
 
 import range from './utils/range';
@@ -16,12 +17,13 @@ import token from './utils/token';
 /* Type imports */
 import type {
   TokenScheme,
-  ColorOptions,
+  ColorConfiguration,
   Rule,
   TokenTheme,
   TokenNames,
 } from './types';
 import type {Gamut} from './utils/token/types';
+import setHarmonies from './utils/harmony';
 
 /**
  * @typedef {Object} TokenTheme
@@ -46,26 +48,35 @@ const radioColor = function () {
 
   /**
    * Sets the colors for the color system
-   * @param {ColorOptions[]} colorsOptions - An array of color options
+   * @param {ColorConfiguration[]} configuration - An array of color options
    * @returns {void}
    */
-  const setColors = (colorsOptions: ColorOptions[]): void => {
-    for (const {
-      prefix = '',
-      color,
-      name,
-      suffix = '',
-      dark = true,
-      font = true,
-      selector = {attribute: true, class: true},
-      theme = {
-        darken: variants.dark,
-        lighten: variants.light,
-      },
-      gamut,
-    } of colorsOptions) {
+  const setColors = (configuration: ColorConfiguration[]): void => {
+    for (let c = 0; c < configuration.length; c++) {
+      const {
+        prefix = '',
+        color,
+        name,
+        suffix = '',
+        dark = true,
+        font = true,
+        selector = {attribute: true, class: true},
+        theme = {
+          darken: variants.dark,
+          lighten: variants.light,
+        },
+        gamut,
+        harmony,
+      } = configuration[c];
       const {darken = variants.dark, lighten = variants.light} = theme;
       const hslColor = colorToHsl(color);
+
+      if (Array.isArray(name) === true && typeof name !== 'undefined') {
+        setHarmonies(name, harmony, hslColor, configuration[c], setColors);
+        setColors(configuration.slice(c + 1));
+
+        return;
+      }
 
       const ranges = {
         light: range(lighten(hslColor)),
