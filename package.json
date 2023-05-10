@@ -1,6 +1,6 @@
 {
   "name": "radio-color-system",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "license": "MIT",
   "scripts": {
     "dev": "wireit",
@@ -42,7 +42,7 @@
       "command": "svelte-package"
     },
     "npm:package": {
-      "command": "npm package"
+      "command": "npm run package"
     },
     "gts:lint": {
       "command": "gts lint"
@@ -173,6 +173,6 @@
     "output": "CHANGELOG.md",
     "template": "keepachangelog",
     "unreleased": true,
-    "commitLimit": true
+    "commitLimit": false
   }
 }
