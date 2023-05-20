@@ -25,16 +25,6 @@ import type {
 import type {Gamut} from './utils/token/types';
 import setHarmonies from './utils/harmony';
 
-/**
- * @typedef {Object} TokenTheme
- * @property {function} TokenTheme - Returns an array of CSS declaration objects.
- * @property {Color} TokenTheme.color - The color to use for the token.
- * @property {string} TokenTheme.name - The name of the token.
- * @property {boolean} TokenTheme.font - Whether to generate a font color token.
- * @property {boolean} TokenTheme.dark - Whether to generate a dark color token.
- * @property {boolean} TokenTheme.light - Whether to generate a light color token.
- * @property {string} TokenTheme.target - The target selector for the token.
- */
 const radioColor = function () {
   const tokens: TokenScheme = {
     light: [],

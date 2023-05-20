@@ -112,9 +112,9 @@ export type Rule = {
 
 /**
  * @typedef {Object} TokenTheme
- * @property {Color} [TokenTheme.dark=null] - The dark color to use for the token.
- * @property {Color} TokenTheme.light - The light color to use for the token.
- * @property {boolean} TokenTheme.font - Whether the token should have a font color variant.
+ * @property {Color|null} [dark] - The dark color or null.
+ * @property {Color} light - The light color.
+ * @property {boolean} font - Indicates if the font is enabled.
  */
 export type TokenTheme = {dark?: Color | null; light: Color; font: boolean};
 
