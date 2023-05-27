@@ -1,5 +1,6 @@
 <script>
-  import { RadioStatic } from '../lib/index'
+  import { RadioStatic, RadioAccent } from '../lib/index'
+
   const colors = [
     {
       color: {
@@ -14,6 +15,10 @@
 
   const color ='red';
 </script>
+
+<RadioAccent>
+  <div class="accent-50 accent-font-50">Accent Color Example</div>
+</RadioAccent>
 
 <RadioStatic {colors}>
   {#each colors as color}
