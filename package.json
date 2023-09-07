@@ -1,6 +1,6 @@
 {
   "name": "radio-color-system",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "scripts": {
     "dev": "wireit",
@@ -132,7 +132,7 @@
     "dist"
   ],
   "peerDependencies": {
-    "svelte": "^3.54.0"
+    "svelte": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
